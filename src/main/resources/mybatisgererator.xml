@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+    <!DOCTYPE generatorConfiguration    
+     PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"    
+     "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">    
+    <generatorConfiguration>
+     <classPathEntry  location="E:\eclipse\lib\mysql\mysql-connector-java\8.0.18\mysql-connector-java-8.0.18.jar"/>        
+        <context id="DB2Tables"  targetRuntime="MyBatis3">
+            <commentGenerator>    
+                <property name="suppressDate" value="true"/>    
+                <!-- 是否去除自动生成的注释 true：是 ： false:否 -->    
+                <property name="suppressAllComments" value="true"/>    
+            </commentGenerator>    
+            <!--数据库链接URL，用户名、密码 -->    
+            <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/edusystem?useSSL=false&amp;characterEncoding=utf-8&amp;serverTimezone=GMT&amp;allowPublicKeyRetrieval=true" userId="root" password="88233">    
+            </jdbcConnection>    
+            <javaTypeResolver>    
+                <property name="forceBigDecimals" value="false"/>    
+            </javaTypeResolver>    
+            <!-- 生成模型的包名和位置，targetPackage用于设置存放的包，targetProject请填写成项目名-->    
+            <javaModelGenerator targetPackage="com.Asika.demo.Entity" targetProject="demo">    
+                <property name="enableSubPackages" value="true"/>    
+                <property name="trimStrings" value="true"/>    
+            </javaModelGenerator>    
+            <!-- 生成映射文件的包名和位置，targetPackage用于设置存放的包，targetProject请填写成项目名-->    
+            <sqlMapGenerator targetPackage="mappers" targetProject="demo">    
+                <property name="enableSubPackages" value="true"/>    
+            </sqlMapGenerator>    
+            <!-- 生成DAO的包名和位置，targetPackage用于设置存放的包，targetProject请填写成项目名-->    
+            <javaClientGenerator type="XMLMAPPER" targetPackage="com.Asika.demo.Mapper" targetProject="demo">    
+                <property name="enableSubPackages" value="true"/>    
+            </javaClientGenerator>    
+            <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->    
+            <table tableName="file" domainObjectName="Draft" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>  
+        </context>    
+</generatorConfiguration>
