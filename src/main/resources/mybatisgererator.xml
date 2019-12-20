@@ -11,25 +11,25 @@
                 <property name="suppressAllComments" value="true"/>    
             </commentGenerator>    
             <!--数据库链接URL，用户名、密码 -->    
-            <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/edusystem?useSSL=false&amp;characterEncoding=utf-8&amp;serverTimezone=GMT&amp;allowPublicKeyRetrieval=true" userId="root" password="88233">    
+            <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/test?useSSL=false&amp;characterEncoding=utf-8&amp;serverTimezone=GMT&amp;allowPublicKeyRetrieval=true" userId="root" password="88233">    
             </jdbcConnection>    
             <javaTypeResolver>    
                 <property name="forceBigDecimals" value="false"/>    
             </javaTypeResolver>    
             <!-- 生成模型的包名和位置，targetPackage用于设置存放的包，targetProject请填写成项目名-->    
-            <javaModelGenerator targetPackage="com.Asika.demo.Entity" targetProject="demo">    
+            <javaModelGenerator targetPackage="com.Asika.demo.entity" targetProject="demo">    
                 <property name="enableSubPackages" value="true"/>    
                 <property name="trimStrings" value="true"/>    
             </javaModelGenerator>    
             <!-- 生成映射文件的包名和位置，targetPackage用于设置存放的包，targetProject请填写成项目名-->    
-            <sqlMapGenerator targetPackage="mappers" targetProject="demo">    
+            <sqlMapGenerator targetPackage="com.Asika.demo.mapper" targetProject="demo">    
                 <property name="enableSubPackages" value="true"/>    
             </sqlMapGenerator>    
             <!-- 生成DAO的包名和位置，targetPackage用于设置存放的包，targetProject请填写成项目名-->    
-            <javaClientGenerator type="XMLMAPPER" targetPackage="com.Asika.demo.Mapper" targetProject="demo">    
+            <javaClientGenerator type="XMLMAPPER" targetPackage="com.Asika.demo.mapper" targetProject="demo">    
                 <property name="enableSubPackages" value="true"/>    
             </javaClientGenerator>    
             <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->    
-            <table tableName="file" domainObjectName="Draft" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>  
+            <table tableName="draftsys_user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>  
         </context>    
 </generatorConfiguration>

@@ -1,8 +1,8 @@
-package com.Asika.demo.Mapper;
+package com.Asika.demo.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.Asika.demo.Entity.Draft;
+import com.Asika.demo.entity.Draft;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 @Mapper

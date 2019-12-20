@@ -35,7 +35,7 @@
 <body class="hold-transition login-page" style="background-image: url('/img/photo1.png'); background-size:100%">
     <div class="login-box">
         <div class="login-logo" style="color:rgb(26, 11, 238)">
-            $(msg)
+                                                                     管理系统
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
