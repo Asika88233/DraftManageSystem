@@ -14,10 +14,13 @@ filter:
     auth: "anon"
    filterlist[1]:
     url: "/draft/**"
-    auth: "anon"
+    auth: "authc"
    filterlist[2]:
     url: "/userLogin"
     auth: "anon"
    filterlist[3]:
     url: "/logout"
     auth: "logout"
+   filterlist[4]:
+    url: "/getCaptcha"
+    auth: "anon"

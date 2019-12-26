@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.Asika.demo.entity.Draft;
+import com.Asika.demo.mapper.DraftMapper;
 import com.Asika.demo.serivce.DraftService;
 
 @Controller
@@ -20,9 +21,11 @@ import com.Asika.demo.serivce.DraftService;
 public class DraftController {
 	@Autowired
 	DraftService draftService;
+	@Autowired
+	DraftMapper  draftMapper;
 	@RequestMapping("/getAllDraft")
 	@ResponseBody
-	public List<Draft> getAllDraft() {
-		return draftService.list();
-	}
+	public Draft getAllDraft() {
+		return draftMapper.selectByPrimaryKey(111);
+}
 }

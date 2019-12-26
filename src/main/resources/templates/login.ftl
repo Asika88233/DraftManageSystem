@@ -35,7 +35,7 @@
 <body class="hold-transition login-page" style="background-image: url('/img/photo1.png'); background-size:100%">
     <div class="login-box">
         <div class="login-logo" style="color:rgb(26, 11, 238)">
-                                                                     管理系统
+            管理系统
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
@@ -47,6 +47,20 @@
             <div class="form-group has-feedback">
                 <input type="password" id="password" class="form-control" placeholder="密码">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="col-xs-8" style="padding-left: 0px;">
+                <div class="form-group has-feedback">
+                    <input type="text" id="verifyCode" class="form-control" placeholder="验证码">
+                    <span class="glyphicon glyphicon-alert form-control-feedback"></span>
+                </div>
+            </div>
+            <div class="col-xs-4" style="right: 27px;">
+                <div class="item-input">
+                    <img id="captcha_img" alt="点击更换" title="点击更换" style="
+                    margin-left: 0px;
+                    width: 100px;
+                " onclick="refresh()" src="/getCaptcha" />
+                </div>
             </div>
             <div class="row">
                 <!-- /.col -->
@@ -64,50 +78,71 @@
     </div>
 </body>
 <script>
-    function loginSubmit(){
+     function refresh() {
+            document.getElementById('captcha_img').src="/getCaptcha";
+        }
+    function loginSubmit() {
         //页面的数据登录者姓名和密码
-        var username=$("input#username").val();
-        var password=$("input#password").val();
-        if(username==""){
-            layer.tips('用户名不能为空',"#username",{
-                tips:[2,'#ff0000']});
+        var userName = $("input#username").val();
+        var passWord = $("input#password").val();
+        var verifyCode = $("input#verifyCode").val();
+        if (userName == "") {
+            layer.tips('用户名不能为空', "#username", {
+                tips: [2, '#ff0000']
+            });
             $("input#username").focus();
             return;
         }
-        if(password==""){
-            layer.tips('密码不能为空','#password',{
-                tips:[2,'#ff0000']
+        if (passWord == "") {
+            layer.tips('密码不能为空', '#password', {
+                tips: [2, '#ff0000']
             });
-            $("input#password").focus();	
+            $("input#password").focus();
+            return;
+        }
+        if (verifyCode == "") {
+            layer.tips('验证码不能为空', '#password', {
+                tips: [2, '#ff0000']
+            });
+            $("input#verifyCode").focus();
             return;
         }
         //当密码和用户名不为空的时候使用Ajax进行用户信息登录验证
-        var strJSON ={"username":username,"password":password};
+        var request = new Object();
+        request.userName=userName;
+        request.passWord=passWord;
+        request.verifyCode=verifyCode;
         $.ajax({
-            url:"/login/login",
-            type:"POST",
-            data:strJSON,
-            success:function(obj){
-                if(obj.status==0){
+            url: "/userLogin",
+            type: "POST",
+            data: JSON.stringify(request),
+            contentType:'application/json',
+            success: function (obj) {
+                debugger;
+                if (obj.code != "500") {
                     alert("登录成功！");
                     //跳转到首页
                     window.location.replace("/index");//登录成功
                 }
-                else{
-                    layer.alert('用户名或密码不正确', {
+                else {
+                    layer.alert(obj.data.msg, {
                         skin: 'layui-layer-molv' //样式类名
-                        ,closeBtn: 0
-                        ,shift: 4 //动画类型
-                      });
-                      return;
+                        , closeBtn: 0
+                        , shift: 4 //动画类型
+                    });
+                    refresh();
+                    return;
                 }
                 return;
             },
-            error:function(){
-                layer.alert('系统错误',{skin:'layui-layer-molv'
-                    ,closeBatn:0});
+            error: function () {
+                layer.alert('系统错误', {
+                    skin: 'layui-layer-molv'
+                    , closeBatn: 0
+                });
             },
         });
     }
-    </script>
+</script>
+
 </html>
