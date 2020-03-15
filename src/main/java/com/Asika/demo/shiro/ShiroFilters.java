@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
@@ -20,8 +21,9 @@ import lombok.Setter;
 @ConfigurationProperties(prefix = "filter")
 public class ShiroFilters {
   private String loginUrl;
-  private ArrayList<ShiroFilterPojo>filterlist;
-  public Map<String, String> getFilter() {
+  private  ArrayList<ShiroFilterPojo>filterlist;
+  @Bean
+  public  Map<String, String> getFilter() {
 	  Map<String, String> map=new LinkedHashMap<String, String>();
 	  for (ShiroFilterPojo shiroFilterPojo : this.getFilterlist()) {
 		map.put(shiroFilterPojo.getUrl(), shiroFilterPojo.getAuth());

@@ -33,11 +33,10 @@ public class LoginController {
     private LoginService loginService;
     
     private static final Logger logger =LoggerFactory.getLogger(DraftController.class);
-	@RequestMapping("/index")
+	@RequestMapping("/login")
 	public String index(ModelMap map, HttpServletRequest request) {
 		return "login";
 	}
-
 	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseVo userLogin(@RequestBody LoginRequestVo request,HttpServletRequest httpRequest) {

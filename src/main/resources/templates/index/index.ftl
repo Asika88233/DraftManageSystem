@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-   <title>稿件管理系统——大厅</title>
+  <title></title>
   <link rel="stylesheet" href="/adminlte/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="/adminlte/font-awesome/css/font-awesome.min.css">
@@ -33,9 +33,12 @@
       if (confirm("是否确认注销？")) {
         $.ajax({
           type: "GET",//传输方式
-          url: "/logout"//action路径
+          url: "/index/loginout",//action路径
+          success: function (msg) {
+            alert("注销成功！");
+            location.reload();
+          }
         });
-        location.reload();
       }
     }
   </script>
@@ -46,7 +49,7 @@
     <header class="main-header">
       <!-- Logo -->
       <a href="javascript://" class="logo">
-        <span class="logo-lg"><b>稿件管理系统</b></span>
+        <span class="logo-lg"><b>教务系统</b></span>
       </a>
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">
@@ -60,7 +63,7 @@
 
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
-            <li><a href="javascript://" data-toggle="control-sidebar" onclick="openMenu('personinfo')">${userName}</a>
+            <li><a href="javascript://" data-toggle="control-sidebar" onclick="openMenu('personinfo')">$(username)$(userlevel)</a>
             </li>
             <li>
               <a href="javascript://" title="注销" onclick="logout()" data-toggle="control-sidebar"><i
@@ -77,22 +80,23 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
           <li class="treeview">
-            <#list menuArray as menuJson> 
-            <a href="javascript://" menu_id="${menuJson.id}">
-              <i class="${menuJson.icon}"></i> <span>${menuJson.name}</span>
+            #for(menuJson:menuArray)
+            <a href="javascript://" menu_id="#(menuJson.id)">
+              <i class="#(menuJson.icon)"></i> <span>#(menuJson.name)</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
             <ul class="treeview-menu">
-              <#list menuJson.subMenus as subMenuArray> 
+              #set(subMenuArray =menuJson.subMenus)
+              #for(subMenu:subMenuArray)
               <li>
-                <a href="javascript://" onclick="openMenu('${subMenuArray.id}')" menu_id="${subMenuArray.id}"><i
-                    class="${subMenuArray.icon}"></i> ${subMenuArray.name}</a>
+                <a href="javascript://" onclick="openMenu('#(subMenu.id)')" menu_id="#(subMenu.id)"><i
+                    class="#(subMenu.icon)"></i> #(subMenu.name)</a>
               </li>
-              </#list>
+              #end
             </ul>
-            </#list>
+            #end
           </li>
 
         </ul>

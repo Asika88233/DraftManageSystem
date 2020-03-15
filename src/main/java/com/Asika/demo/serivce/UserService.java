@@ -7,4 +7,5 @@ import com.Asika.demo.mapper.UserMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 @Service
 public class UserService extends ServiceImpl<UserMapper,User>{
+	
 }

@@ -1,22 +1,30 @@
 package com.Asika.demo.serivce;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.Asika.demo.domain.vo.LoginRequestVo;
 import com.Asika.demo.domain.vo.LoginResultVo;
 import com.Asika.demo.domain.vo.ResponseVo;
+import com.Asika.demo.entity.User;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.google.code.kaptcha.Constants;
 
 @Service
 public class LoginService {
+	@Autowired
+	UserService userService;
       public ResponseVo Login(LoginRequestVo request,HttpServletRequest httpRequest) {
     	  Subject subject =SecurityUtils.getSubject();
           LoginResultVo result= new LoginResultVo();
@@ -47,7 +55,15 @@ public class LoginService {
           result.setCode("500");
           result.setMsg("登陆成功");
           ResponseVo vo =ResponseVo.success();
-			vo.setData(result);
-         return vo;
+		  vo.setData(result);
+		  Session session =subject.getSession();
+		  QueryWrapper<User> warpper=new QueryWrapper<User>();
+		  warpper.eq("user_id",request.getUserName());
+		  warpper.last("limit 1");
+		  List<User> list =userService.list(warpper);
+		  session.setAttribute("userName", list.get(0).getUserName());
+		  session.setAttribute("userId", list.get(0).getUserId());
+		  session.setAttribute("auth", list.get(0).getAuth());
+          return vo;
 	}
 }

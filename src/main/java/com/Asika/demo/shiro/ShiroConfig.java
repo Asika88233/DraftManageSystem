@@ -12,8 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ShiroConfig {
 	@Autowired
-	private ShiroFilters shirofilters;
-
+	private  ShiroFilters shirofilters;
 	@Bean
 	public UserRealm getUserRealm(
 			@Qualifier("md5Matcher") HashedCredentialsMatcher hashedCredentialsMatcher) {
@@ -33,13 +32,13 @@ public class ShiroConfig {
 	}
 
 	@Bean
-	public DefaultSecurityManager getDefaultSecurityManager(@Qualifier("getUserRealm") UserRealm realm) {
+	public  DefaultSecurityManager getDefaultSecurityManager(@Qualifier("getUserRealm") UserRealm realm) {
 		DefaultSecurityManager securityManager = new DefaultWebSecurityManager();
 		securityManager.setRealm(realm);
 		return securityManager;
 	}
     /**
-                *     配置加密方式
+               *     配置加密方式
      * @return
      */
 	@Bean
