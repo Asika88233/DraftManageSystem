@@ -19,11 +19,14 @@ filter:
     url: "/userLogin"
     auth: "anon"
    filterlist[3]:
-    url: "/logout"
-    auth: "logout"
-   filterlist[4]:
     url: "/getCaptcha"
     auth: "anon"
-   filterlist[5]:
+   filterlist[4]:
     url: "/index"
     auth: "authc"
+   filterlist[5]:
+    url: "/questRecive"
+    auth: "roles[1]"
+   filterlist[6]:
+    url: "/questOrder"
+    auth: "roles[2]"

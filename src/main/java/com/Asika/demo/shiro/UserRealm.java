@@ -29,29 +29,31 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 
 
 public class UserRealm extends AuthorizingRealm {
-	private static final Logger logger = LoggerFactory.getLogger(DraftController.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserRealm.class);
 	@Autowired
 	UserService userService;
 
 	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) 
+		throws AuthenticationException {
 		logger.info("执行认证逻辑");
 		UsernamePasswordToken userToken=(UsernamePasswordToken) token;
-		String userId = userToken.getUsername();
+		String userId = userToken.getUsername();//获取前端返回的用户名和密码
 		QueryWrapper<User> warpper=new QueryWrapper<User>();
 		warpper.eq("user_id",userId);
 		warpper.last("limit 1");
-		List<User> list =userService.list(warpper);
+		List<User> list =userService.list(warpper);//数据库中是否当前用户名
 		if (list.size()==0) {
 			logger.info("该用户不存在，userid={}",userToken.getUsername());
-			return null;
+			return null;//查询不到，则抛出UnknownAccountException
 		}
 		else {
 				Object principal=userId;
 				Object credentials=list.get(0).getPassword();
 				String realmName=getName();
-				SimpleAuthenticationInfo info =new SimpleAuthenticationInfo(principal, credentials, ByteSource.Util.bytes(userId), realmName);
-				logger.info("用户登陆，userid={}",userToken.getUsername());
+				SimpleAuthenticationInfo info =new SimpleAuthenticationInfo(principal, 
+				credentials, ByteSource.Util.bytes(userId), realmName);
+				logger.info("用户尝试登陆，userid={}",userToken.getUsername());
 				return info;
 		}
 	}
@@ -60,13 +62,12 @@ public class UserRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		Object principal=principals.getPrimaryPrincipal();
 		String userId=principal.toString();
-		QueryWrapper<User> warpper=new QueryWrapper<User>();
-		warpper.eq("user_id",userId);
-		warpper.last("limit 1");
-		User user =userService.list(warpper).get(0);
-		Set<String> roles=new HashSet<String>();
-		roles.add(user.getAuth().toString());
-		logger.info("执行授权逻辑,userId={},auth={}",userId,user.getAuth().toString());
+		Subject subject =SecurityUtils.getSubject();
+		Session session =subject.getSession();
+		String auth =session.getAttribute("auth").toString();
+		Set<String> roles =new HashSet<String>();
+		roles.add(auth);
+		logger.info("执行授权逻辑,userId={},auth={}",userId,auth);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo(roles);
 		return info;
 	}

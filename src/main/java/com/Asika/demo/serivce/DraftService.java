@@ -8,4 +8,5 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 @Service
 public class DraftService extends ServiceImpl<DraftMapper, Draft>{
+	
 }

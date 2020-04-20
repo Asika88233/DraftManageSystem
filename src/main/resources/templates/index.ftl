@@ -5,14 +5,17 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-   <title>稿件管理系统——大厅</title>
+  <title>稿件管理系统——大厅</title>
   <link rel="stylesheet" href="/adminlte/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/layui/css/layui.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="/adminlte/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="/adminlte/Ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="/adminlte/css/AdminLTE.min.css">
-  <link rel="stylesheet" href="/adminlte/css/skins/skin-blue.css">
+  <link rel="stylesheet" href="/adminlte/css/skins/skin-black.css">
+  <link rel="stylesheet" href="/DataTables-1.10.15/media/css/jquery.dataTables.css">
   <!-- jQuery 3 -->
   <script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
   <!-- Bootstrap 3.3.7 -->
@@ -22,26 +25,25 @@
   <script src="/adminlte/js/fastclick.js"></script>
   <script src="/adminlte/js/app.min.js"></script>
   <script src="/adminlte/js/icheck.min.js"></script>
+  <script src="/layui/layui.js"></script>
+  <script src="/DataTables-1.10.15/media/js/jquery.dataTables.js"></script>
   <script type="text/javascript" src="/js/controller.js"></script>
-  <script type="text/javascript" src="/js/layer-v3.1.1/layer/layer.js"></script>
-  <script type="text/javascript" src="/js/jquery-cookie/jquery.cookie.js"></script>
-  <script type="text/javascript" src="/js/layDate-v5.0.9/laydate/laydate.js"></script>
-  <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
-  <script type="text/javascript" src="/js/DataTables-1.10.15/media/js/jquery.dataTables.js"></script>
-  <script>
+</head>
+ <script>
     function logout() {
       if (confirm("是否确认注销？")) {
         $.ajax({
           type: "GET",//传输方式
-          url: "/logout"//action路径
+          url: "/index/loginout",//action路径
+          success: function (msg) {
+            alert("注销成功！");
+            location.reload();
+          }
         });
-        location.reload();
       }
     }
   </script>
-</head>
-
-<body class="skin-blue sidebar-mini">
+<body class="skin-black sidebar-mini">
   <div class="wrapper">
     <header class="main-header">
       <!-- Logo -->
@@ -77,21 +79,21 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
           <li class="treeview">
-            <#list menuArray as menuJson> 
-            <a href="javascript://" menu_id="${menuJson.id}">
-              <i class="${menuJson.icon}"></i> <span>${menuJson.name}</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <#list menuJson.subMenus as subMenuArray> 
-              <li>
-                <a href="javascript://" onclick="openMenu('${subMenuArray.id}')" menu_id="${subMenuArray.id}"><i
-                    class="${subMenuArray.icon}"></i> ${subMenuArray.name}</a>
-              </li>
-              </#list>
-            </ul>
+            <#list menuArray as menuJson>
+              <a href="javascript://" menu_id="${menuJson.id}">
+                <i class="${menuJson.icon}"></i> <span>${menuJson.name}</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <#list menuJson.subMenus as subMenuArray>
+                  <li>
+                    <a href="javascript://" onclick="openMenu('${subMenuArray.id}')" menu_id="${subMenuArray.id}"><i
+                        class="${subMenuArray.icon}"></i> ${subMenuArray.name}</a>
+                  </li>
+                </#list>
+              </ul>
             </#list>
           </li>
 
@@ -133,15 +135,5 @@
     </footer>
   </div>
 </body>
-<script>
-  $(document).ready(function () {
-    $('body').bind("click", ".showDate", function () {
-      laydate.render({
-        elem: document.getElementById("birtyDay"),
-        type: "date"
-      });
-    })
-  });
-</script>
 
 </html>

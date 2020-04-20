@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menus>
 	<menu id="accountman" name="账户管理" icon="fa fa-user">
-		<submenu id="changepass" name="修改密码" icon="fa fa-lock"/>
-		<submenu id="personinfo" name="个人信息" icon="fa fa-star"/>
+		<submenu id="changePass" name="修改密码" icon="fa fa-lock"/>
+		<submenu id="personInfo" name="个人信息" icon="fa fa-star"/>
 	</menu>
-		<menu id="coursemanange" name="课程管理" icon="fa ion-ios-book">
-		<submenu id="coursechoose" name="我要选课" icon="fa ion-android-bulb"/>
+		<menu id="birefmanange" name="稿件管理" icon="fa ion-android-clipboard">
+		<submenu id="questReceive" name="任务领取" icon="fa ion-android-bulb"/>
+		<submenu id="questUpdate" name="任务上传" icon="fa ion-android-arrow-up"/>
+		<submenu id="resultDownload" name="绩效下载" icon="fa ion-android-archive"/>
+	</menu>
+	<menu id="accountman" name="数据管理" icon="fa ion-android-cloud-done">
+		<submenu id="loginData" name="登陆数据查看" icon="fa ion-android-checkmark-circle"/>
+		<submenu id="questData" name="任务完成状况" icon="fa ion-android-attach"/>
+		<submenu id="briefData" name="稿件数据查看" icon="fa ion-android-bulb"/>
 	</menu>
 </menus>

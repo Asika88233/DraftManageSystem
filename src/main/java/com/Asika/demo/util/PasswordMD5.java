@@ -13,8 +13,7 @@ public class PasswordMD5 {
 		String hashAlgorithmName = "MD5";
 		int hashInteractions = 1024;
 		String salt=userId;
-		String pwd = "maodian1234";
-		String result = new SimpleHash(hashAlgorithmName, pwd, ByteSource.Util.bytes(salt), hashInteractions).toHex();
+		String result = new SimpleHash(hashAlgorithmName, passWord, ByteSource.Util.bytes(salt), hashInteractions).toHex();
 		return result;
 	}
 }
