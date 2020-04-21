@@ -44,7 +44,11 @@ public class MenuController {
    	return "personInfo";
    }
    @RequestMapping("/questReceive")
-	   public String questRecive(ModelMap map, HttpServletRequest request) {
+   public String questRecive(ModelMap map, HttpServletRequest request) {
 	   	return "questRecive";
    }
+   @RequestMapping("/questUpdate")
+   public String questUpdate(ModelMap map, HttpServletRequest request) {
+	   	return "questUpdate";
+  }
 }

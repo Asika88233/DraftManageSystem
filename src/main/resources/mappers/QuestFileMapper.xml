@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Asika.demo.mapper.QuestFileMapper">
+  <resultMap id="BaseResultMap" type="com.Asika.demo.entity.QuestFile">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="quest_id" jdbcType="INTEGER" property="questId" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="is_passed" jdbcType="TINYINT" property="isPassed" />
+    <result column="quest_receive" jdbcType="VARCHAR" property="questReceive" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, quest_id, time, num, is_passed, quest_receive, path
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from quest_file
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from quest_file
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.Asika.demo.entity.QuestFile">
+    insert into quest_file (id, quest_id, time, 
+      num, is_passed, quest_receive, 
+      path)
+    values (#{id,jdbcType=INTEGER}, #{questId,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, 
+      #{num,jdbcType=INTEGER}, #{isPassed,jdbcType=TINYINT}, #{questReceive,jdbcType=VARCHAR}, 
+      #{path,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.Asika.demo.entity.QuestFile">
+    insert into quest_file
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="questId != null">
+        quest_id,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="isPassed != null">
+        is_passed,
+      </if>
+      <if test="questReceive != null">
+        quest_receive,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="questId != null">
+        #{questId,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="isPassed != null">
+        #{isPassed,jdbcType=TINYINT},
+      </if>
+      <if test="questReceive != null">
+        #{questReceive,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.Asika.demo.entity.QuestFile">
+    update quest_file
+    <set>
+      <if test="questId != null">
+        quest_id = #{questId,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="isPassed != null">
+        is_passed = #{isPassed,jdbcType=TINYINT},
+      </if>
+      <if test="questReceive != null">
+        quest_receive = #{questReceive,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.Asika.demo.entity.QuestFile">
+    update quest_file
+    set quest_id = #{questId,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP},
+      num = #{num,jdbcType=INTEGER},
+      is_passed = #{isPassed,jdbcType=TINYINT},
+      quest_receive = #{questReceive,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

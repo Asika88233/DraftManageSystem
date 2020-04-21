@@ -22,4 +22,8 @@ public class QuestController {
    public ResponseVo questReceive(@RequestParam(value="questId",required=true)String questId) {
 	   return questService.questReceive(questId);
    }
+   @GetMapping("/getQuestReceive")
+   public ResponseVo getquestReceive() {
+	   return questService.getQuestReceive();
+   }
 }

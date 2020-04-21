@@ -38,7 +38,7 @@ public class LoginController {
     @Autowired 
     private LoginService loginService;
     
-    private static final Logger logger =LoggerFactory.getLogger(DraftController.class);
+    private static final Logger logger =LoggerFactory.getLogger(LoginController.class);
 	@RequestMapping("/login")
 	public String index(ModelMap map, HttpServletRequest request) {
 		return "login";

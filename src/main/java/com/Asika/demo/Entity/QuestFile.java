@@ -14,27 +14,22 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@TableName("quest")
+@TableName("quest_file")
 @Repository
-public class Quest {
+public class QuestFile {
 	@TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private String questName;
+    private Integer questId;
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    private Date time;
 
-    private String questBiref;
+    private Integer num;
 
-    private Integer questReward;
-
-    private String questOrder;
+    private Integer isPassed;
 
     private String questReceive;
 
     private String path;
-    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
-    private Date createTime;
-    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
-    private Date receiveTime;
-    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
-    private Date finshTime;
+
 }

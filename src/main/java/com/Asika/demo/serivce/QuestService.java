@@ -1,5 +1,7 @@
 package com.Asika.demo.serivce;
 
+import java.util.Date;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
@@ -33,5 +35,22 @@ public class QuestService extends ServiceImpl<QuestMapper,Quest>{
 	  ResponseVo result= ResponseVo.success();
 	  result.setData("任务领取成功");
 	  return result;
+}
+  public ResponseVo getQuestReceive() {
+	  Subject subject =SecurityUtils.getSubject();
+	  Session session =subject.getSession();
+	  String userId=(String) session.getAttribute("userId");
+	  QueryWrapper<Quest> warpper=new QueryWrapper<Quest>();
+	  warpper.eq("quest_receive", userId);
+	  ResponseVo result= ResponseVo.success();
+	  result.setData(this.list(warpper));
+	  return result;
+}
+  public void questFileUpload(String path,Integer questId) {
+	  Quest quest=new Quest();
+	  quest.setId(questId);
+	  quest.setPath(path);
+	  quest.setReceiveTime(new Date(System.currentTimeMillis()));
+	  this.updateById(quest);
 }
 }
